@@ -128,7 +128,7 @@ function Home() {
       </div>
       <hr /> 
       <div className='navFooterBackToTop'>
-        <span onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}}>
+        <span onClick={scrollToTop} style={{display: visible ? 'block' : 'none'}}>
           Back to top
         </span> 
       </div>

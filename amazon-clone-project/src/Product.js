@@ -9,11 +9,11 @@ function Product({ id, title, price, rating, image }) {
         <p>{title}</p>
       
       <p className='product__price'>
-        <small>$</small>
+        <small><span>$</span></small>
         <strong>{price}</strong>
       </p>
       <div className='product__rating'>
-          {Array(rating).fill().map((_, i) => (<p>⭐️</p>))}
+          {Array(rating).fill().map((_, i) => (<span>⭐️</span>))}
       </div>
     </div>
     <div className='product__image'>
