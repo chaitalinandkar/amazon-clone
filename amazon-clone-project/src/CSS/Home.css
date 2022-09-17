@@ -37,12 +37,15 @@
   text-align: center;
   color: white;
   background-color: #485769;
-  padding: 25px 0;
+  padding: 10px 0;
   line-height: 19px;
-  font-size: 19px;
+  font-size: 35px;
   margin-top: 40px;
+  transition: 0.15s all ease-in-out;
 }
+
 .navFooterBackToTop span:hover{
-  font-weight: bold;
+  font-size: 45px;
   cursor: pointer;
+  padding: 5px 0;
 }

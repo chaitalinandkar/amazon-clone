@@ -76,3 +76,6 @@
 .checkout__bag, .signin__link{
   text-decoration: none;
 }
+.guestName{
+  font-size: 9px;
+}

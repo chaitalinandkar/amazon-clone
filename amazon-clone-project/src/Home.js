@@ -78,12 +78,14 @@ function Home() {
 
         <div className='home__row'>
            <Product
+            id={1}
             title="The 7 Keys to Success: Awakening to Your Life Purpose"
             price={9.99}
             rating={4}
             image={image} />
           
           <Product
+            id={2}
             title="KitchenAid Fresh Prep Slicer/Shredder Attachment, White"
             price={129.99}
             rating={5}
@@ -92,16 +94,19 @@ function Home() {
           
         <div className='home__row'>
           <Product
+            id={3}
             title="SAMSUNG Galaxy Watch 4 Classic 46mm Smartwatch with ECG Monitor Tracker for Health, Fitness, Running, Sleep Cycles, GPS Fall Detection, Bluetooth, US Version, Black"
             price={369.85}
             rating={3}
             image={samsung__watch} />
           <Product
+            id={4}
             title="Floating Bluetooth Speaker,Ypllake Pool Speakers Waterproof Shower Bluetooth Wireless IPX7 with Light Stereo for Outdoor Pool AccessoriesHot Tub"
             price={33.99}
             rating={4}
             image={wireless__speaker} />
           <Product
+            id={5}
             title="VIVOSUN Heavy Duty Folding Collapsible Wagon Utility Outdoor Camping Cart with Universal Wheels & Adjustable Handle, Blue"
             price={101.99}
             rating={3}
@@ -109,15 +114,17 @@ function Home() {
         </div>
         <div className='home__row'>
           <Product
+            id={6}
             title="Kotton Culture Reversible Pinch Pleated Down Alternative Comforter Set 600 TC 100% Egyptian Cotton Shell 300 GSM Microfiber Fill, 1 Pintuck Comforter & 2 Pillow Shams (Oversized King, Ivory)"
             price={138.00}
             rating={3}
           image={comforter} />
         <Product
-            title="Apple AirPods Max Wireless Over-Ear Headphones. Active Noise Cancelling, Transparency Mode, Spatial Audio, Digital Crown for Volume Control. Bluetooth Headphones for iPhone - Sky Blue"
-            price={429.00}
-            rating={4}
-            image={apple_airpods} />
+          id={7}
+          title="Apple AirPods Max Wireless Over-Ear Headphones. Active Noise Cancelling, Transparency Mode, Spatial Audio, Digital Crown for Volume Control. Bluetooth Headphones for iPhone - Sky Blue"
+          price={429.00}
+          rating={4}
+          image={apple_airpods} />
       </div>
       <hr />
       <div className='home__row'>
@@ -129,7 +136,7 @@ function Home() {
       <hr /> 
       <div className='navFooterBackToTop'>
         <span onClick={scrollToTop} style={{display: visible ? 'block' : 'none'}}>
-          Back to top
+          <i className="fa-sharp fa-solid fa-angle-up"></i>
         </span> 
       </div>
       <div className='mb-5'></div>
