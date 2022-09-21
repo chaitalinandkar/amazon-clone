@@ -77,7 +77,7 @@ function Home() {
       </div>
 
         <div className='home__row'>
-           <Product
+           <Product 
             id={1}
             title="The 7 Keys to Success: Awakening to Your Life Purpose"
             price={9.99}
@@ -87,7 +87,7 @@ function Home() {
           <Product
             id={2}
             title="KitchenAid Fresh Prep Slicer/Shredder Attachment, White"
-            price={129.99}
+            price={49.99}
             rating={5}
             image={kitchen__aid__product} />
         </div>
@@ -126,14 +126,21 @@ function Home() {
           rating={4}
           image={apple_airpods} />
       </div>
-      <hr />
       <div className='home__row'>
-        <img src={back_to_school_2} className="amazon_services" alt="home-slided-content" />
-        <img src={amazon_basics_2} className="amazon_services" alt="home-slided-content" />
-        <img src={amazon_audible_2} className="amazon_services" alt="home-slided-content" />
-        <img src={groceries_2} className="amazon_services" alt="home-slided-content" />
+          <div className="amazon_listed_services" >
+          <img src={back_to_school_2} className='img-fluid amazon_services' alt="home-slided-content" />
+          </div>
+          <div className="amazon_listed_services" >
+            <img src={amazon_basics_2} className='img-fluid amazon_services' alt="home-slided-content" />
+          </div>
+          <div className="amazon_listed_services" >
+            <img src={amazon_audible_2} className='img-fluid amazon_services' alt="home-slided-content" />
+          </div>
+          <div className="amazon_listed_services" >
+            <img src={groceries_2} className='img-fluid amazon_services' alt="home-slided-content" />
+          </div>
+       
       </div>
-      <hr /> 
       <div className='navFooterBackToTop'>
         <span onClick={scrollToTop} style={{display: visible ? 'block' : 'none'}}>
           <i className="fa-sharp fa-solid fa-angle-up"></i>

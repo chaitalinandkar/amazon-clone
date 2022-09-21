@@ -28,11 +28,30 @@
   position: fixed;
   z-index: 1;
 }
-.amazon_services{
+
+.home__row  .amazon_services{
   width: 500px;
   height: 400px;
   margin: 20px;
 }
+.amazon_listed_services{
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.amazon_listed_services img{
+  /* width: 100%; */
+  border-radius: 10px;
+  display: block;
+  height: 300px;
+  transition: transform 0.5s;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.6);
+}
+.amazon_listed_services img:hover{
+  transform: scale(1.1);
+  
+}
+
 .navFooterBackToTop span {
   text-align: center;
   color: white;

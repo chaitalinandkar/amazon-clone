@@ -28,7 +28,7 @@
   width: 100%;
 }
 
-.header__searchIcon {
+.header__search > i {
   padding: 5px;
   height: 24px !important;
   background-color: #f0c14b;

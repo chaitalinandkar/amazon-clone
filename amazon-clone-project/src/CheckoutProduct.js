@@ -2,6 +2,7 @@ import React from 'react'
 import './CSS/CheckoutProduct.css'
 import { useStateValue } from './StateProvider'
 
+
 function CheckoutProduct({ id, image, title, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
 
@@ -11,6 +12,7 @@ function CheckoutProduct({ id, image, title, price, rating }) {
       type: 'REMOVE_FROM_BASKET',
       id: id,
     });
+
   }
   return (
     <div className='checkoutProduct'>

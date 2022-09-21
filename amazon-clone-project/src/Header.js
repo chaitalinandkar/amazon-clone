@@ -1,7 +1,5 @@
 import React from 'react';
 import './CSS/Header.css';
-import SearchIcon from '@material-ui/icons/Search';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import amazon__icon from "./Images/amazon__icon.png";
 import { Link } from 'react-router-dom';
 import { useStateValue } from "./StateProvider";
@@ -16,7 +14,6 @@ function Header() {
     }
   }
 
- 
   return (
     <div className='header'>
       <Link to='/'>
@@ -25,13 +22,13 @@ function Header() {
       
       <div className="header__search">
         <input className="header__searchInput" type="text" />
-        <SearchIcon className="header__searchIcon" />
+        <i className="fa-solid fa-magnifying-glass"></i>
       </div>
 
       <div className="header__nav">
         <Link to='/login' className='signin__link'>
           <div onClick={handleAuthentication} className="header__option">
-            <span className="header__optionLineOne">Hello, {user?.email}</span>
+            <span className="header__optionLineOne">Hello, {!user ? 'Guest' : user.email}</span>
             <span className="header__optionLineTwo">{ user ? 'Sign Out' : 'Sign In'}</span>
           </div>
         </Link>
@@ -51,7 +48,7 @@ function Header() {
             <span className="header__optionLineTwo header__basketCount">
               {basket?.length}
             </span>
-            <ShoppingBasketIcon />
+            <i className="fa-solid fa-shopping-basket mt-2"></i>
           </div>
         </Link>
           
