@@ -10,7 +10,6 @@ import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { getBasketTotal } from './reducer'; 
 import axios from './axios';
 
-
 function Payment() {
 
   const [{ basket, user }, dispatch] = useStateValue();
@@ -38,6 +37,8 @@ function Payment() {
     getClientSecret();
   }, [basket])
 
+  console.log('THE SECRET IS >>>>>', clientSecret);
+
   const handleSubmit = async(e) => {
     // styling the stripe stuff
     e.preventDefault();
@@ -49,18 +50,23 @@ function Payment() {
       }
     }).then(({ paymentIntent }) => {
 
+    
       //paymentIntent = payment confirmation
       setSucceeded(true)
       setError(null)
       setProcessing(false)
-      navigate('/orders', {replace:true})
+      dispatch({
+        type: 'EMPTY_BASKET'
+      })
+      // navigate('/orders', {replace:true})
+      navigate("/orders")
     })
   }
   const handleChange = e => {
     //Listen for changes in the CardElement
     //and display any error as the customer types their card details
-    // setDisabled(e.error);
-    // setError(e.error ? e.error.message : "");
+    setDisabled(e.error);
+    setError(e.error ? e.error.message : "");
   }
 
   

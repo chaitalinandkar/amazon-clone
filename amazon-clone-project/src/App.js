@@ -11,6 +11,7 @@ import CreateAccount from './CreateAccount';
 import Payment from './Payment';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
+import Orders from './Orders';
 
 
 const promise = loadStripe("pk_live_51ICE0nBYuG9mgDMkwojwDrNo4OiViWlc5N1kwjQLH5HLIuAHx8EIS1WVhQSNiDLzprhfJn0nKePH6qrkLLhbD7sS00U3UxeHhJ");
@@ -61,6 +62,9 @@ function App() {
             <Route path='/payment' element={<Payment />} />
           </Routes>
         </Elements>
+        <Routes>
+          <Route path='/orders' element={<Orders />} />
+        </Routes>
       </Router>
     </div>
     
