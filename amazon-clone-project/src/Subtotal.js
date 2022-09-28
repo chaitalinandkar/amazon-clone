@@ -3,10 +3,25 @@ import "./CSS/Subtotal.css"
 import { NumericFormat } from 'react-number-format';
 import { useStateValue } from './StateProvider';
 import { getBasketTotal } from './reducer'; 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Subtotal() {
-  const [{ basket }, dispatch] = useStateValue();
+  const [{ basket, user }, dispatch] = useStateValue();
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+
+    if (basket?.length === 0) {
+      alert('Basket is empty');
+      navigate('/');
+    } else if (user){
+      navigate('/payment');
+    } else {
+      alert('Please Sign in before checkout, thanks!')
+      navigate('/login');
+    }
+   
+  }
   return (
     <div className='subtotal'>
       <NumericFormat
@@ -22,9 +37,7 @@ function Subtotal() {
         thousandSeparator={true}
         prefix={'$'}
       />
-      <Link to='/payment'>
-        <button>Proceed to Checkout</button>
-      </Link>
+        <button onClick={handleCheckout}>Proceed to Checkout</button>
       
     </div>
   )

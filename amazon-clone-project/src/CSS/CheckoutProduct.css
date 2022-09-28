@@ -6,9 +6,13 @@
   padding: 20px;
   border-radius: 3px;
   box-shadow: 5px 5px 4px rgba(0, 0, 0, 0.1);
+  width: 600px;
   
 }
-
+.checkoutProduct__title{
+  line-height: 20px;
+  font-size: 14px;
+}
 .checkoutProduct__image{
   width: 200px;
 }
@@ -25,12 +29,13 @@
   background: #F7CA00;
   border-radius: 10px;
   width: 100%;
-  height: 35px;
+  height: fit-content;
   border: none;
   margin-top: 10px;
   color: #111;
   width: fit-content;
-  padding: 0 20px;
+  padding: 5px 20px;
+  line-height: 17px;
 }
 .checkoutProduct button:hover{
   box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);

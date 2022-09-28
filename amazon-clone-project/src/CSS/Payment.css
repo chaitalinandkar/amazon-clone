@@ -3,28 +3,25 @@
   padding: 10px;
   font-weight: 400;
   background-color: rgb(234, 237, 237);
-  border-bottom: 1PX SOLID lightgray;
+  border-bottom: 1px solid lightgray;
+  overflow: hidden;
 }
 .payment__container > h1 > a{
   text-decoration: none;
 }
 .payment__section{
   display: flex;
-  padding: 20px;
+  padding: 20px 30px 100px 30px;
   margin: 0 20px;
   border-bottom:  1px solid lightgray;
 }
 .payment__title{
   flex: 0.2;
 }
+.review__items, .payment__address{
+  flex: 0.7;
+}
 
-.payment__address{
-  flex: 0.8;
-}
-.payment__items{
-  flex: 0.9;
-  margin-top: -50px;
-}
-.payment__details{
-  flex: 0.3;
+.payment__method__section{
+  flex: 0.4;
 }

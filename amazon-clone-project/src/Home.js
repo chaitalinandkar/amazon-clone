@@ -116,13 +116,13 @@ function Home() {
           <Product
             id={6}
             title="Kotton Culture Reversible Pinch Pleated Down Alternative Comforter Set 600 TC 100% Egyptian Cotton Shell 300 GSM Microfiber Fill, 1 Pintuck Comforter & 2 Pillow Shams (Oversized King, Ivory)"
-            price={138.00}
+            price={138.99}
             rating={3}
           image={comforter} />
         <Product
           id={7}
           title="Apple AirPods Max Wireless Over-Ear Headphones. Active Noise Cancelling, Transparency Mode, Spatial Audio, Digital Crown for Volume Control. Bluetooth Headphones for iPhone - Sky Blue"
-          price={429.00}
+          price={429.99}
           rating={4}
           image={apple_airpods} />
       </div>

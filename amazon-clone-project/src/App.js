@@ -14,11 +14,11 @@ import { Elements } from '@stripe/react-stripe-js';
 import Orders from './Orders';
 
 
-const promise = loadStripe("pk_live_51ICE0nBYuG9mgDMkwojwDrNo4OiViWlc5N1kwjQLH5HLIuAHx8EIS1WVhQSNiDLzprhfJn0nKePH6qrkLLhbD7sS00U3UxeHhJ");
+const promise = loadStripe("Publishable key");
 
 function App() {
 
-  const [{ }, dispatch] = useStateValue();
+  const [{}, dispatch] = useStateValue();
   useEffect(() => {
     // will only run once the app component loads...
     auth.onAuthStateChanged(authUser => {
