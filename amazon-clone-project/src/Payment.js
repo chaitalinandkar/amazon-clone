@@ -20,6 +20,22 @@ function Payment() {
   const elements = useElements();
 
   
+  //for checkout address
+  const [check, setCheck] = useState(false);
+  const [state, setState] = useState({
+    deliveryFirstName: "",
+    deliveryLastName: "",
+    deliveryAddress: "",
+    deliveryPhone: "",
+  })
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
 
   //to catch error
@@ -83,19 +99,22 @@ function Payment() {
     <div className='payment'>
 
       <Header />
+      
       <div className='payment__container'>
         <h1>
           Checkout(
-          <Link to='/checkout'>{basket?.length} items</Link>
+          {basket?.length} items
           )
         </h1>
 
         {/* payment-section ------- review itemss */}
         <div className='payment__section mt-3'>
+          
           <div className='payment__title'>
             <h3>Review items : </h3>
           </div>
           <div className='review__items'>
+            
             {basket.map((item, index) => (
               <CheckoutProduct
                 key={index}
@@ -108,6 +127,47 @@ function Payment() {
             ))}
           </div>
         </div>
+
+        {/* payment-section ------ delivery address */}
+        <div className='payment__section'>
+          <div className='payment__title'>
+            <h3>Delivery Address : </h3>
+          </div>
+          <div className='payment__address'>
+            <p className='fs-5'><strong>{user?.email}</strong></p>
+            
+            <form className='Delivery__address__form'>
+              <input type='text' className='input-font' name='deliveryFirstName' placeholder='First Name' autoComplete='{false}' onChange={onChange}></input>
+              <input type='text' className='input-font' name='deliveryLastName' placeholder='Last Name' autoComplete='{false}' onChange={onChange}></input>
+              <input type='text' className='input-font' name='deliveryAddress' placeholder='Address' autoComplete='{false}' onChange={onChange}></input>
+              <input type='text' className='input-font' name='deliveryPhone' placeholder='Phone Number' autoComplete='{false}' onChange={onChange}></input>
+            </form>
+
+          </div>
+        </div>
+        
+        {/* payment-section ------ billing address */}
+        <div className='payment__section'>
+          <div className='payment__title'>
+            <h3>Billing Address : </h3>
+          </div>
+          <div className='payment__address'>
+            {/* For billing address */}
+            <form className=''>
+              <div className='check'>
+                <label htmlFor='checkbox'>Same as Delivery Address</label>
+                <input type='checkbox' className='ms-2' value='false' name='checkbox' onChange={() => setCheck(!check)}></input>
+              </div>
+              <div className='billing__address_form mt-3'>
+                <input type='text' className='input-font' name='billingFirstName' placeholder='First Name' autoComplete='{false}' value={check ? state.deliveryFirstName : ""}></input>
+                <input type='text' className='input-font' name='billingLastName' placeholder='Last Name' autoComplete='{false}' value={check ? state.deliveryLastName : ""}></input>
+                <input type='text' className='input-font' name='billingAddress' placeholder='Address' autoComplete='{false}' value={check ? state.deliveryAddress : ""}></input>
+                <input type='text' className='input-font' name='billingPhone' placeholder='Phone' autoComplete='{false}' value={check ? state.deliveryPhone : ""}></input>
+              </div>
+            </form>
+          </div>
+        </div>
+
 
         {/* payment-section ----------- payment-method */}
         <div className='payment__section'>

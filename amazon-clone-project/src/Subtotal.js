@@ -12,7 +12,7 @@ function Subtotal() {
   const handleCheckout = () => {
 
     if (basket?.length === 0) {
-      alert('Basket is empty');
+      alert('Basket is empty!! Please add items before checkout!!');
       navigate('/');
     } else if (user){
       navigate('/payment');

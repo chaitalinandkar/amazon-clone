@@ -25,3 +25,18 @@
 .payment__method__section{
   flex: 0.4;
 }
+.Delivery__address__form,
+.billing__address_form {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.Delivery__address__form input,
+.billing__address_form input {
+  width: 300px;
+  margin-bottom: 10px;
+  border: 1px solid lightgrey;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
