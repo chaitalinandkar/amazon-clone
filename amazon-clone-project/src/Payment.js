@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CheckoutProduct from './CheckoutProduct';
 import "./CSS/Payment.css";
 import Header from './Header';
@@ -8,8 +8,8 @@ import { useStateValue } from './StateProvider';
 import { NumericFormat } from 'react-number-format';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { getBasketTotal } from './reducer'; 
-// import { getTaxes } from './reducer';
-// import { getTotalAmount } from './reducer';
+import { getTaxes } from './reducer';
+import { getTotalAmount } from './reducer';
 import axios from './axios';
 
 function Payment() {
@@ -29,7 +29,7 @@ function Payment() {
     deliveryPhone: "",
   })
 
-  const onChange = (e) => {
+  const handleAddressField = (e) => {
     const { name, value } = e.target;
     setState((prevState) => ({
       ...prevState,
@@ -44,6 +44,7 @@ function Payment() {
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState("");
   const [clientSecret, setClientSecret] = useState(true);
+  const stringClientSecret = clientSecret.toString();
 
   //whenever the basket changes it will make below request and it will update the special stripe secret
   // which allows us to charge a customer the correct amount
@@ -53,38 +54,47 @@ function Payment() {
       const response = await axios({
         method: 'post',
         //stripe expects the total in currencies subunits
-        url: `/payment/create?total=${getBasketTotal(basket) * 100}`
+        url: `/payment/create?total=${Math.round(getTotalAmount(basket) * 100)}`
       });
       setClientSecret(response.data.clientSecret);
     }
     getClientSecret();
   }, [basket])
 
-  console.log('THE SECRET IS >>>>>', clientSecret);
+  // console.log('THE SECRET IS >>>>>', clientSecret);
 
 
-  const handleSubmit = async(e) => {
-    // styling the stripe stuff
-    e.preventDefault();
-    setProcessing(true);
+  const handleSubmit = async (e) => {
+    
+    //no items in the cart means no checkout
+    if (basket.length === 0) {
+      alert("Please add items in the cart before checkout!!")
+      navigate('/')
+    } else {
+      // styling the stripe stuff
+      e.preventDefault();
+      setProcessing(true);
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement)
-      }
-    }).then(({ paymentIntent }) => {
-      //paymentIntent = payment confirmation
-      setSucceeded(true)
-      setError(null)
-      setProcessing(false)
-      dispatch({
-        type: 'EMPTY_BASKET'
+      const payload = await stripe.confirmCardPayment(stringClientSecret, {
+        payment_method: {
+          card: elements.getElement(CardElement)
+        }
+      }).then(({ paymentIntent }) => {
+        //paymentIntent = payment confirmation
+
+        setSucceeded(true)
+        setError(null)
+        setProcessing(false)
+        dispatch({
+          type: 'EMPTY_BASKET'
+        })
+        
+        navigate("/orders")
       })
-      // navigate('/orders', {replace:true})
-      navigate("/orders")
-    })
+      }
+    
   }
-
+ 
 
 
   const handleChange = e => {
@@ -107,14 +117,14 @@ function Payment() {
           )
         </h1>
 
-        {/* payment-section ------- review itemss */}
+        {/*************************************** payment-section ------- review itemss ***************************************/}
         <div className='payment__section mt-3'>
           
           <div className='payment__title'>
             <h3>Review items : </h3>
           </div>
           <div className='review__items'>
-            
+            {((basket.length) === 0) ? <h3>No items in the cart for checkout!!</h3> : ""}
             {basket.map((item, index) => (
               <CheckoutProduct
                 key={index}
@@ -128,7 +138,7 @@ function Payment() {
           </div>
         </div>
 
-        {/* payment-section ------ delivery address */}
+        {/*************************************** payment-section ------ delivery address ***************************************/}
         <div className='payment__section'>
           <div className='payment__title'>
             <h3>Delivery Address : </h3>
@@ -137,23 +147,23 @@ function Payment() {
             <p className='fs-5'><strong>{user?.email}</strong></p>
             
             <form className='Delivery__address__form'>
-              <input type='text' className='input-font' name='deliveryFirstName' placeholder='First Name' autoComplete='{false}' onChange={onChange}></input>
-              <input type='text' className='input-font' name='deliveryLastName' placeholder='Last Name' autoComplete='{false}' onChange={onChange}></input>
-              <input type='text' className='input-font' name='deliveryAddress' placeholder='Address' autoComplete='{false}' onChange={onChange}></input>
-              <input type='text' className='input-font' name='deliveryPhone' placeholder='Phone Number' autoComplete='{false}' onChange={onChange}></input>
+              <input type='text' className='input-font' name='deliveryFirstName' placeholder='First Name' autoComplete='{false}' onChange={handleAddressField}></input>
+              <input type='text' className='input-font' name='deliveryLastName' placeholder='Last Name' autoComplete='{false}' onChange={handleAddressField}></input>
+              <input type='text' className='input-font' name='deliveryAddress' placeholder='Address' autoComplete='{false}' onChange={handleAddressField}></input>
+              <input type='text' className='input-font' name='deliveryPhone' placeholder='Phone Number' autoComplete='{false}' onChange={handleAddressField}></input>
             </form>
 
           </div>
         </div>
         
-        {/* payment-section ------ billing address */}
+        {/*************************************** payment-section ------ billing address ***************************************/}
         <div className='payment__section'>
           <div className='payment__title'>
             <h3>Billing Address : </h3>
           </div>
           <div className='payment__address'>
-            {/* For billing address */}
-            <form className=''>
+            {/********************************************************** For billing address ***************************************/}
+            <form >
               <div className='check'>
                 <label htmlFor='checkbox'>Same as Delivery Address</label>
                 <input type='checkbox' className='ms-2' value='false' name='checkbox' onChange={() => setCheck(!check)}></input>
@@ -168,8 +178,88 @@ function Payment() {
           </div>
         </div>
 
+        
+        {/************************************** Order Summary Container ***************************************/}
+        <div className='payment__section'>
+          <div className='payment__title'>
+            <h3>Order Summary : </h3>
+          </div>
+          <div className='order__summary__container'>
+            <div className='order__summary ps-5 pe-5'>
+              <div>
+                Items({basket?.length}): 
+              </div> 
+              <div>
+                <NumericFormat
+                  renderText={(value) => (
+                    <div>
+                      {value}
+                    </div>
+                  )}
+                  decimalScale={2}
+                  value={getBasketTotal(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                />
+              </div>
+            </div>
+            
+            <div className='order__summary ps-5 pe-5'>
+              <div>
+                Shipping & handling :
+              </div>
+              <div>
+                $0.00
+              </div>
+            </div>
 
-        {/* payment-section ----------- payment-method */}
+            <div className='order__summary ps-5 pe-5 border-bottom border-dark'>
+              <div>
+                Estimated tax to be collected :
+              </div>
+              <div>
+                <NumericFormat
+                  renderText={(value) => (
+                    <div>
+                      {value}
+                    </div>
+                  )}
+                  decimalScale={2}
+                  value={getTaxes(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                />
+              </div>
+            </div>
+
+            <div className='order__summary ps-5 pe-5'>
+              <div>
+                <span>Order total : </span>
+              </div>
+              <div>
+                <NumericFormat
+                  renderText={(value) => (
+                    <div>
+                      {value}
+                    </div>
+                  )}
+                  decimalScale={2}
+                  value={getTotalAmount(basket)}
+                  displayType={"text"}
+                  thousandSeparator={true}
+                  prefix={'$'}
+                />
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+
+
+        {/*************************************** payment-section --- payment-method ***************************************/}
         <div className='payment__section'>
           <div className='payment__title'>
             <h3>Payment Method : </h3>
@@ -189,7 +279,7 @@ function Payment() {
                         </div>
                       )}
                       decimalScale={2}
-                      value={getBasketTotal(basket)}
+                      value={getTotalAmount(basket)}
                       displayType={"text"}
                       thousandSeparator={true}
                       prefix={'$'}
@@ -213,4 +303,4 @@ function Payment() {
   )
 }
 
-export default Payment;
+  export default Payment;

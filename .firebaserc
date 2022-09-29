@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "clone-challenge-af177"
-  }
+    "default": "clone-challenge-af177",
+    "AMAZON__CLONE": "clone-challenge-af177"
+  },
+  "targets": {},
+  "etags": {}
 }

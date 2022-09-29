@@ -7,6 +7,12 @@ export const initialState = {
 export const getBasketTotal = (basket) => 
   basket?.reduce((amount, item) => item.price + amount, 0);
 
+export const getTaxes = (basket) =>
+  basket?.reduce((amount, item) => ((item.price) * 0.09) + amount, 0);
+
+export const getTotalAmount = (basket) =>
+  basket?.reduce((amount, item) => ((item.price) * 1.09 ) + amount, 0);
+
 
 const reducer = (state, action) => {
   console.log(action);

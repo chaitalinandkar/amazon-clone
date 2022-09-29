@@ -3,7 +3,7 @@ import "./CSS/Subtotal.css"
 import { NumericFormat } from 'react-number-format';
 import { useStateValue } from './StateProvider';
 import { getBasketTotal } from './reducer'; 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Subtotal() {
   const [{ basket, user }, dispatch] = useStateValue();
