@@ -73,7 +73,7 @@
   color: white;
 }
 
-.checkout__bag, .signin__link{
+.checkout__bag, .signin__link, .orderPage__link{
   text-decoration: none;
 }
 .guestName{

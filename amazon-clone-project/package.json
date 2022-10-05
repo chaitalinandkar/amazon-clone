@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "gh-pages": "^4.0.0",
     "math-random": "^2.0.1",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-flip-move": "^3.0.4",
@@ -27,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "homepage": "https://github.com/chaitalinandkar/amazon-clone",
-    "proxy": "http://localhost:3000"
+    "origin": "http://localhost:3000"
   },
   "eslintConfig": {
     "extends": [

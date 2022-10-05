@@ -1,0 +1,12 @@
+.orders{
+  background-color: rgb(234, 234, 234);
+}
+
+.orders__container{
+  padding: 20px 80px;
+
+}
+
+.orders__container > h1 {
+  margin: 30px 0;
+}

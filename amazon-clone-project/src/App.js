@@ -14,7 +14,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import Orders from './Orders';
 
 
-const promise = loadStripe("Publishable key");
+const promise = loadStripe("pk_test_51Ln3mYHa1pmkxA1iZzS2z7MKRnCRYTCBkbIg6jhzBeJRDwYFWfOb3dQSWoXVwcUlTNCB43KhcopaQwIj6V8GCsw800MJjbpSGZ");
 
 function App() {
 
