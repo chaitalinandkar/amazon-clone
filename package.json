@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "react-flip-move": "^3.0.4"
+    "stripe": "^10.12.0"
   }
 }

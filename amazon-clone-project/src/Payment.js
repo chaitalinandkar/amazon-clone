@@ -55,7 +55,7 @@ function Payment() {
       const response = await axios({
         method: 'post',
         //stripe expects the total in currencies subunits
-        url: `/payment/create?total=${Math.round(getTotalAmount(basket) * 100)}`
+        url: `/payment/create?total=${getTotalAmount(basket) * 100}`
       });
       setClientSecret(response.data.clientSecret);
     }
@@ -63,7 +63,7 @@ function Payment() {
   }, [basket])
 
   console.log('THE SECRET IS >>>>>', clientSecret);
-
+  console.log('👱', user)
 
   const handleSubmit = async (e) => {
     
@@ -97,7 +97,7 @@ function Payment() {
 
         setSucceeded(true)
         setError(null)
-        setProcessing(true)
+        setProcessing(false)
         dispatch({
           type: 'EMPTY_BASKET'
         })
@@ -182,10 +182,10 @@ function Payment() {
                 <input type='checkbox' className='ms-2' value='false' name='checkbox' onChange={() => setCheck(!check)}></input>
               </div>
               <div className='billing__address_form mt-3'>
-                <input type='text' className='input-font' name='billingFirstName' placeholder='First Name' autoComplete='{false}' value={check ? state.deliveryFirstName : ""}></input>
-                <input type='text' className='input-font' name='billingLastName' placeholder='Last Name' autoComplete='{false}' value={check ? state.deliveryLastName : ""}></input>
-                <input type='text' className='input-font' name='billingAddress' placeholder='Address' autoComplete='{false}' value={check ? state.deliveryAddress : ""}></input>
-                <input type='text' className='input-font' name='billingPhone' placeholder='Phone' autoComplete='{false}' value={check ? state.deliveryPhone : ""}></input>
+                <input type='text' className='input-font' name='billingFirstName' placeholder='First Name' autoComplete='{false}' onChange={() => check ? state.deliveryFirstName : ""}></input>
+                <input type='text' className='input-font' name='billingLastName' placeholder='Last Name' autoComplete='{false}' onChange={() => check ? state.deliveryLastName : ""}></input>
+                <input type='text' className='input-font' name='billingAddress' placeholder='Address' autoComplete='{false}' onChange={() => check ? state.deliveryAddress : ""}></input>
+                <input type='text' className='input-font' name='billingPhone' placeholder='Phone' autoComplete='{false}' onChange={() => check ? state.deliveryPhone : ""}></input>
               </div>
             </form>
           </div>
